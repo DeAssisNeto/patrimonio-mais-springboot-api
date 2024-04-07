@@ -1,5 +1,6 @@
 package com.francisco.patrimoniomais.models;
 
+import com.francisco.patrimoniomais.enums.GenderEnum;
 import com.francisco.patrimoniomais.roles.UserRole;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -23,6 +24,10 @@ public class UserModel implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
+    @Column(nullable = false)
+    private String name;
+    @Column(nullable = false)
+    private GenderEnum gender;
     @Column(nullable = false, unique = true)
     private String login;
     @Column(nullable = false)
@@ -30,7 +35,9 @@ public class UserModel implements UserDetails {
     @Column(nullable = false)
     private UserRole role;
 
-    public UserModel(String login, String password, UserRole role){
+    public UserModel(String name, GenderEnum gender,String login, String password, UserRole role){
+        this.name = name;
+        this.gender = gender;
         this.login = login;
         this.password = password;
         this.role = role;

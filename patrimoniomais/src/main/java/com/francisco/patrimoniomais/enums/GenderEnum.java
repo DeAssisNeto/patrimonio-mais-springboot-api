@@ -1,11 +1,11 @@
 package com.francisco.patrimoniomais.enums;
 
-public enum SexoEnum {
+public enum GenderEnum {
     MASCULINO("masculino"),
     FEMININO("feminino");
     private String sexo;
 
-    SexoEnum(String sexo){
+    GenderEnum(String sexo){
         this.sexo = sexo;
     }
 

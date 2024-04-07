@@ -26,7 +26,7 @@ public class AuthorizationService implements UserDetailsService {
     public UserModel save(RegisterRecordDto dto){
         if (userRepository.existsByLogin(dto.login())) throw new UserAlreadyExistsException(dto.login());
         String encryptedPassword = new BCryptPasswordEncoder().encode(dto.password());
-        var newUser = new UserModel(dto.login(), encryptedPassword, dto.role());
+        var newUser = new UserModel(dto.name(), dto.gender(), dto.login(), encryptedPassword, dto.role());
         return userRepository.save(newUser);
     }
 
