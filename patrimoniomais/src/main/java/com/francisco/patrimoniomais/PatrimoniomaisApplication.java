@@ -9,3 +9,4 @@ public class PatrimoniomaisApplication {
         SpringApplication.run(PatrimoniomaisApplication.class, args);
     }
 }
+

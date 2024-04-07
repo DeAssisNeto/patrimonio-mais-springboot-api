@@ -2,7 +2,9 @@ package com.francisco.patrimoniomais.controllers;
 
 import com.francisco.patrimoniomais.dtos.AuthenticationRecordDto;
 import com.francisco.patrimoniomais.dtos.RegisterRecordDto;
+import com.francisco.patrimoniomais.models.UserModel;
 import com.francisco.patrimoniomais.services.AuthorizationService;
+import com.francisco.patrimoniomais.services.TokenService;
 import com.francisco.patrimoniomais.utils.ApiGlobalResponseDto;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +24,17 @@ public class AuthenticationController {
     private AuthenticationManager authenticationManager;
     @Autowired
     private AuthorizationService authorizationService;
+    @Autowired
+    private TokenService tokenService;
 
     @PostMapping("/login")
     public ResponseEntity<ApiGlobalResponseDto> login(@RequestBody @Valid AuthenticationRecordDto dto){
         var usernamePassword = new UsernamePasswordAuthenticationToken(dto.login(), dto.password());
         var auth = authenticationManager.authenticate(usernamePassword);
 
-        return ResponseEntity.status(HttpStatus.OK).build();
+        var token = tokenService.generateToken((UserModel) auth.getPrincipal());
+
+        return ResponseEntity.status(HttpStatus.OK).body(new ApiGlobalResponseDto(token));
     }
 
     @PostMapping("/register")
