@@ -2,6 +2,7 @@ package com.francisco.patrimoniomais.services;
 
 import com.francisco.patrimoniomais.dtos.AuthenticationRecordDto;
 import com.francisco.patrimoniomais.dtos.RegisterRecordDto;
+import com.francisco.patrimoniomais.exceptions.UserAlreadyExistsException;
 import com.francisco.patrimoniomais.models.UserModel;
 import com.francisco.patrimoniomais.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ public class AuthorizationService implements UserDetailsService {
     }
 
     public UserModel save(RegisterRecordDto dto){
+        if (userRepository.existsByLogin(dto.login())) throw new UserAlreadyExistsException(dto.login());
         String encryptedPassword = new BCryptPasswordEncoder().encode(dto.password());
         var newUser = new UserModel(dto.login(), encryptedPassword, dto.role());
         return userRepository.save(newUser);

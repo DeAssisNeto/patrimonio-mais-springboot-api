@@ -1,6 +1,16 @@
 package com.francisco.patrimoniomais.dtos;
 
 import com.francisco.patrimoniomais.roles.UserRole;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
-public record RegisterRecordDto(String login, String password, UserRole role) {
+public record RegisterRecordDto(
+        @NotNull(message ="O campo não pode ser nulo")
+        @NotBlank(message = "O campo não pode estar em branco")
+        String login,
+        @NotNull(message ="O campo não pode ser nulo")
+        @NotBlank(message = "O campo não pode estar em branco")
+        String password,
+        @NotNull(message ="O campo não pode ser nulo")
+        UserRole role) {
 }
