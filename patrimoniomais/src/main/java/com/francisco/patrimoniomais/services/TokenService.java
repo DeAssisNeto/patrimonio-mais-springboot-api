@@ -28,7 +28,7 @@ public class TokenService {
             return token;
 
         }catch (JWTCreationException exception){
-            throw  new RuntimeException("Erro ao gerar o token", exception);
+            throw  new JWTCreationException("Erro ao gerar o token", exception);
 
         }
     }
@@ -43,7 +43,7 @@ public class TokenService {
                     .getSubject();
 
         }catch (JWTVerificationException exception){
-            return "";
+            throw new JWTVerificationException("Token expirado");
         }
     }
 

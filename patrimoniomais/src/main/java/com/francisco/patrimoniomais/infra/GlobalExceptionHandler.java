@@ -1,5 +1,6 @@
 package com.francisco.patrimoniomais.infra;
 
+import com.francisco.patrimoniomais.exceptions.InvalidPasswordException;
 import com.francisco.patrimoniomais.exceptions.UserAlreadyExistsException;
 import com.francisco.patrimoniomais.utils.ApiGlobalResponseDto;
 import org.springframework.http.HttpStatus;
@@ -15,9 +16,9 @@ import java.util.Map;
 @ControllerAdvice
 public class GlobalExceptionHandler {
     @ExceptionHandler
-    private ResponseEntity<ApiGlobalResponseDto> handlerArgumenteNotValid(MethodArgumentNotValidException exception){
+    private ResponseEntity<ApiGlobalResponseDto> handlerArgumenteNotValid(MethodArgumentNotValidException e){
         Map<String, String> errors = new HashMap<>();
-        exception.getBindingResult().getAllErrors().forEach((error) -> {
+        e.getBindingResult().getAllErrors().forEach((error) -> {
             String fieldName = ((FieldError) error).getField();
             String message = error.getDefaultMessage();
             errors.put(fieldName, message);
@@ -27,9 +28,16 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(UserAlreadyExistsException.class)
-    private ResponseEntity<ApiGlobalResponseDto> userAlreadyExistsHandler(UserAlreadyExistsException exception){
-        Map<String, String> error = Map.of("error", exception.getMessage());
+    private ResponseEntity<ApiGlobalResponseDto> userAlreadyExistsHandler(UserAlreadyExistsException e){
+        Map<String, String> error = Map.of("error", e.getMessage());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiGlobalResponseDto(error));
 
     }
+
+    @ExceptionHandler(InvalidPasswordException.class)
+    private ResponseEntity<ApiGlobalResponseDto> invalidPasswordHandler(InvalidPasswordException e){
+        Map<String, String> error = Map.of("error", e.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiGlobalResponseDto(error));
+    }
+
 }
