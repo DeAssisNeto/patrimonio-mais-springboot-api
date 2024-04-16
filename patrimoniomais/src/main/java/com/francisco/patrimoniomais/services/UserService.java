@@ -31,12 +31,13 @@ public class UserService {
         Pattern pattern = Pattern.compile("[!@$#%&*]");
         Matcher matcher = pattern.matcher(password);
 
-        if(!password.matches(".*[A-Z].*") ||
+        if(password.length() <= 4 ||
+                !password.matches(".*[A-Z].*") ||
                 !password.matches(".*[a-z].*") ||
                 !password.matches(".*\\d.*") ||
                 !matcher.find()) {
             throw new InvalidPasswordException
-                    ("Erro, a senha deve coter pelo menos um caracter maiúsculo, minúsculo e um caracter especial -> !@$#%&*");
+                    ("Erro, a senha deve conter mais de 4 caracters, pelo menos um maiúsculo, minúsculo e um caracter especial -> !@$#%&*");
         }
 
     }

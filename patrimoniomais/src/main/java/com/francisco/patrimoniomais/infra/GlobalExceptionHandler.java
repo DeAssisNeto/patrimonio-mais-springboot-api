@@ -1,6 +1,7 @@
 package com.francisco.patrimoniomais.infra;
 
 import com.francisco.patrimoniomais.exceptions.InvalidPasswordException;
+import com.francisco.patrimoniomais.exceptions.ResourceNotFoundException;
 import com.francisco.patrimoniomais.exceptions.UserAlreadyExistsException;
 import com.francisco.patrimoniomais.utils.ApiGlobalResponseDto;
 import org.springframework.http.HttpStatus;
@@ -36,6 +37,12 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(InvalidPasswordException.class)
     private ResponseEntity<ApiGlobalResponseDto> invalidPasswordHandler(InvalidPasswordException e){
+        Map<String, String> error = Map.of("error", e.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiGlobalResponseDto(error));
+    }
+
+    @ExceptionHandler
+    private ResponseEntity<ApiGlobalResponseDto> ResourceNotFoundHandler(ResourceNotFoundException e){
         Map<String, String> error = Map.of("error", e.getMessage());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiGlobalResponseDto(error));
     }
