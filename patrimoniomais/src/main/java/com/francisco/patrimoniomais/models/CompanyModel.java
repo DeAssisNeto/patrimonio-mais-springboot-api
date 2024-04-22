@@ -23,4 +23,10 @@ public class CompanyModel implements Serializable {
     private String cnpj;
     @Column(nullable = false)
     private String description;
+
+    public CompanyModel(String name, String cnpj, String description) {
+        this.name = name;
+        this.cnpj = cnpj;
+        this.description = description;
+    }
 }
