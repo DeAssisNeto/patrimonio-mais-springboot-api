@@ -1,31 +1,25 @@
 package com.francisco.patrimoniomais.models;
 
-
-import com.francisco.patrimoniomais.enums.TypeEnum;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.UUID;
 
+@Table(name = "tb_subsector")
 @Entity
-@Table(name = "tb_group")
 @Getter
 @Setter
 @NoArgsConstructor
-public class GroupModel {
+public class SubsectorModel implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     @Column(nullable = false)
-    private TypeEnum type;
-    @Column(nullable = false)
-    private String subType;
+    private String name;
     @ManyToOne
-    @JoinColumn(
-            name = "equipment_id"
-    )
-    private EquipmentModel equipmentModel;
-
+    @JoinColumn(name = "sector_id")
+    private SectorModel sector;
 }
