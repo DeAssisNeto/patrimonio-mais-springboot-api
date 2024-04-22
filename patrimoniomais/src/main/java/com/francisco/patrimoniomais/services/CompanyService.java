@@ -27,6 +27,12 @@ public class CompanyService {
         return companyRepository.findAll(pageable);
     }
 
+    public CompanyModel getById(UUID id){
+        Optional<CompanyModel> model =  companyRepository.findById(id);
+        if (model.isPresent()) {return model.get();}
+        throw new ResourceNotFoundException("Company", "id", id.toString());
+    }
+
     public CompanyModel update(UUID id, CompanyPutDto dto){
         Optional<CompanyModel> model = companyRepository.findById(id);
         if (model.isPresent()){

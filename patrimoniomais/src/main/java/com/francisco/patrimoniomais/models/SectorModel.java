@@ -22,4 +22,9 @@ public class SectorModel implements Serializable {
     @ManyToOne
     @JoinColumn(name = "company_id")
     private CompanyModel company;
+
+    public SectorModel(String name, CompanyModel company) {
+        this.name = name;
+        this.company = company;
+    }
 }

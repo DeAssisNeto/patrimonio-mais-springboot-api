@@ -3,7 +3,6 @@ package com.francisco.patrimoniomais.controllers;
 import com.francisco.patrimoniomais.dtos.CompanyPostDto;
 import com.francisco.patrimoniomais.dtos.CompanyPutDto;
 import com.francisco.patrimoniomais.models.CompanyModel;
-import com.francisco.patrimoniomais.repositories.CompanyRepository;
 import com.francisco.patrimoniomais.services.CompanyService;
 import com.francisco.patrimoniomais.utils.ApiGlobalResponseDto;
 import jakarta.validation.Valid;
@@ -36,15 +35,12 @@ public class CompanyController {
         return ResponseEntity.status(HttpStatus.OK).body(companyService.getAll(pageable));
     }
 
-    @PutMapping("{id}")
-    public ResponseEntity<ApiGlobalResponseDto> deleteById(
-            @RequestBody
-            CompanyPutDto dto,
-            @PathVariable(value = "id")UUID id){
+    @PutMapping("/{id}")
+    public ResponseEntity<ApiGlobalResponseDto> update(@RequestBody CompanyPutDto dto, @PathVariable(value = "id")UUID id){
         return ResponseEntity.status(HttpStatus.OK).body(new ApiGlobalResponseDto(companyService.update(id, dto)));
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity deleteById(@PathVariable(value = "id") UUID id){
         companyService.delete(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
