@@ -1,8 +1,6 @@
 package com.francisco.patrimoniomais.dtos;
 
 import com.francisco.patrimoniomais.models.CompanyModel;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 
 public record CompanyPutDto(String name, String cnpj, String description) {
 

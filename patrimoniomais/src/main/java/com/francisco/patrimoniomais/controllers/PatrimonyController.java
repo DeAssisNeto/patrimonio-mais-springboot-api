@@ -1,11 +1,8 @@
 package com.francisco.patrimoniomais.controllers;
 
-import com.francisco.patrimoniomais.dtos.PatrimonyPutRecordDto;
-import com.francisco.patrimoniomais.dtos.PatrimonyRecordDto;
 import com.francisco.patrimoniomais.models.PatrimonyModel;
 import com.francisco.patrimoniomais.services.PatrimonyService;
 import com.francisco.patrimoniomais.utils.ApiGlobalResponseDto;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

@@ -3,9 +3,7 @@ package com.francisco.patrimoniomais.services;
 import com.francisco.patrimoniomais.dtos.SectorPostDto;
 import com.francisco.patrimoniomais.dtos.SectorPutDto;
 import com.francisco.patrimoniomais.exceptions.ResourceNotFoundException;
-import com.francisco.patrimoniomais.models.CompanyModel;
 import com.francisco.patrimoniomais.models.SectorModel;
-import com.francisco.patrimoniomais.repositories.CompanyRepository;
 import com.francisco.patrimoniomais.repositories.SectorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -28,6 +26,12 @@ public class SectorService {
 
     public Page<SectorModel> getAll(Pageable pageable){
         return sectorRepository.findAll(pageable);
+    }
+
+    public SectorModel getById(UUID id){
+        Optional<SectorModel> model = sectorRepository.findById(id);
+        if (model.isPresent()) return model.get();
+        throw new ResourceNotFoundException("Sector", "id", id.toString());
     }
 
     public SectorModel update(UUID id, SectorPutDto dto){
