@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -20,6 +21,7 @@ public class SubsectorService {
     @Autowired
     private SectorService sectorService;
 
+    @Transactional
     public SubsectorModel save(SubsectorPostDto dto){
         return subsectorRespository.save(new SubsectorModel(dto.name(), sectorService.getById(dto.sector_id())));
     }
@@ -28,6 +30,15 @@ public class SubsectorService {
         return subsectorRespository.findAll(pageable);
     }
 
+    public SubsectorModel getById(UUID id) {
+        Optional<SubsectorModel> model = subsectorRespository.findById(id);
+        if (model.isPresent()) {
+            return model.get();
+        }
+        throw new ResourceNotFoundException("Subsector", "id", id.toString());
+    }
+
+    @Transactional
     public SubsectorModel update(UUID id, SubsectorPutDto dto){
         Optional<SubsectorModel> subsectorModel = subsectorRespository.findById(id);
         if (subsectorModel.isPresent()){
@@ -39,6 +50,7 @@ public class SubsectorService {
         throw new ResourceNotFoundException("Subsector", "id", id.toString());
     }
 
+    @Transactional
     public void deleteById(UUID id){
         Optional<SubsectorModel> model = subsectorRespository.findById(id);
         if (model.isEmpty()){

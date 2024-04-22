@@ -22,4 +22,10 @@ public class LocationModel implements Serializable {
     @ManyToOne
     @JoinColumn(name = "subsector_id")
     private SubsectorModel subsector;
+
+
+    public LocationModel(String name, SubsectorModel subsector) {
+        this.name = name;
+        this.subsector = subsector;
+    }
 }

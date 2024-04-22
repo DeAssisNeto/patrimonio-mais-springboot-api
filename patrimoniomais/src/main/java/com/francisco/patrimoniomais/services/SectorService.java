@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -20,6 +21,7 @@ public class SectorService {
     @Autowired
     private CompanyService companyService;
 
+    @Transactional
     public SectorModel save(SectorPostDto dto){
         return sectorRepository.save(new SectorModel(dto.name(), companyService.getById(dto.company_id())));
     }
@@ -34,6 +36,7 @@ public class SectorService {
         throw new ResourceNotFoundException("Sector", "id", id.toString());
     }
 
+    @Transactional
     public SectorModel update(UUID id, SectorPutDto dto){
         Optional<SectorModel> sectorModel = sectorRepository.findById(id);
         if(sectorModel.isPresent()){
@@ -45,6 +48,7 @@ public class SectorService {
         throw new ResourceNotFoundException("Sector", "id", id.toString());
     }
 
+    @Transactional
     public void deleteById(UUID id){
         Optional<SectorModel> model = sectorRepository.findById(id);
         if (model.isEmpty()){
