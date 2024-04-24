@@ -20,10 +20,18 @@ public class TombamentoModel implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     @Column(nullable = false)
-    private StatusEnum status;
+    private StatusEnum statusType;
     @Column(nullable = false)
     private String code;
     @Column(nullable = false)
-    private LocalDateTime create_at;
+    private LocalDateTime createAt;
+    @Column(nullable = false)
+    private Boolean active;
 
+    public TombamentoModel(StatusEnum statusType, String code, LocalDateTime createAt) {
+        this.statusType = statusType;
+        this.code = code;
+        this.createAt = createAt;
+        this.active = true;
+    }
 }

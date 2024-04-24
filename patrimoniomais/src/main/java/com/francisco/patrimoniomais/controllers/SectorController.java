@@ -1,7 +1,6 @@
 package com.francisco.patrimoniomais.controllers;
 
-import com.francisco.patrimoniomais.dtos.SectorPostDto;
-import com.francisco.patrimoniomais.dtos.SectorPutDto;
+import com.francisco.patrimoniomais.dtos.SectorRecordDto;
 import com.francisco.patrimoniomais.models.SectorModel;
 import com.francisco.patrimoniomais.services.SectorService;
 import com.francisco.patrimoniomais.utils.ApiGlobalResponseDto;
@@ -24,7 +23,7 @@ public class SectorController {
     private SectorService sectorService;
 
     @PostMapping
-    public ResponseEntity<ApiGlobalResponseDto> save(@RequestBody @Valid SectorPostDto dto){
+    public ResponseEntity<ApiGlobalResponseDto> save(@RequestBody @Valid SectorRecordDto dto){
         return ResponseEntity.status(HttpStatus.CREATED).body(new ApiGlobalResponseDto(sectorService.save(dto)));
     }
 
@@ -35,7 +34,7 @@ public class SectorController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ApiGlobalResponseDto> update(@RequestBody SectorPutDto dto, @PathVariable(value = "id")UUID id){
+    public ResponseEntity<ApiGlobalResponseDto> update(@RequestBody SectorRecordDto dto, @PathVariable(value = "id")UUID id){
         return ResponseEntity.status(HttpStatus.OK).body(new ApiGlobalResponseDto(sectorService.update(id, dto)));
     }
 

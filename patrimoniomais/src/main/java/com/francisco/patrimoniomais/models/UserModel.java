@@ -34,6 +34,8 @@ public class UserModel implements UserDetails {
     private String password;
     @Column(nullable = false)
     private UserRole role;
+    @Column(nullable = false)
+    private Boolean active;
 
     public UserModel(String name, GenderEnum gender,String login, String password, UserRole role){
         this.name = name;

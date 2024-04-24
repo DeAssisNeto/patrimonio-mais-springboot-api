@@ -5,10 +5,10 @@ import jakarta.validation.constraints.NotNull;
 
 import java.util.UUID;
 
-public record SubsectorPostDto(    @NotNull(message ="O campo não pode ser nulo")
+public record SubsectorRecordDto(@NotNull(message ="O campo não pode ser nulo")
                                    @NotBlank(message = "O campo não pode estar em branco")
                                    String name,
-                                   @NotNull(message ="O campo não pode ser nulo")
-                                   UUID sector_id) {
+                                 @NotNull(message ="O campo não pode ser nulo")
+                                   UUID sectorId) {
 
 }

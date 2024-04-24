@@ -1,10 +1,8 @@
 package com.francisco.patrimoniomais.services;
 
-import com.francisco.patrimoniomais.dtos.LocationPostDto;
-import com.francisco.patrimoniomais.dtos.LocationPutDto;
+import com.francisco.patrimoniomais.dtos.LocationRecordDto;
 import com.francisco.patrimoniomais.exceptions.ResourceNotFoundException;
 import com.francisco.patrimoniomais.models.LocationModel;
-import com.francisco.patrimoniomais.models.SubsectorModel;
 import com.francisco.patrimoniomais.repositories.LocationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -23,9 +21,9 @@ public class LocationService {
     private SubsectorService subsectorService;
 
     @Transactional
-    public LocationModel save(LocationPostDto dto){
+    public LocationModel save(LocationRecordDto dto){
 
-        return locationRepository.save(new LocationModel(dto.name(), subsectorService.getById(dto.subsector_id() )));
+        return locationRepository.save(new LocationModel(dto.name(), subsectorService.getById(dto.subsectorId())));
     }
 
     public Page<LocationModel> getAll(Pageable pageable){
@@ -33,12 +31,12 @@ public class LocationService {
     }
 
     @Transactional
-    public LocationModel update(UUID id, LocationPutDto dto){
+    public LocationModel update(UUID id, LocationRecordDto dto){
         Optional<LocationModel> locationModel = locationRepository.findById(id);
         if (locationModel.isPresent()){
             LocationModel model = locationModel.get();
             if (dto.name() != null) model.setName(dto.name());
-            if (dto.subsector_id() != null) model.setSubsector(subsectorService.getById(dto.subsector_id()));
+            if (dto.subsectorId() != null) model.setSubsector(subsectorService.getById(dto.subsectorId()));
             return locationRepository.save(model);
         }
         throw new ResourceNotFoundException("Location", "id", id.toString());

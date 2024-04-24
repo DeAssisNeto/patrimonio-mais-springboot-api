@@ -22,9 +22,12 @@ public class SubsectorModel implements Serializable {
     @ManyToOne
     @JoinColumn(name = "sector_id")
     private SectorModel sector;
+    @Column(nullable = false)
+    private Boolean active;
 
     public SubsectorModel(String name, SectorModel sector) {
         this.name = name;
         this.sector = sector;
+        this.active = true;
     }
 }

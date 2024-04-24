@@ -1,7 +1,6 @@
 package com.francisco.patrimoniomais.services;
 
-import com.francisco.patrimoniomais.dtos.SubsectorPostDto;
-import com.francisco.patrimoniomais.dtos.SubsectorPutDto;
+import com.francisco.patrimoniomais.dtos.SubsectorRecordDto;
 import com.francisco.patrimoniomais.exceptions.ResourceNotFoundException;
 import com.francisco.patrimoniomais.models.SubsectorModel;
 import com.francisco.patrimoniomais.repositories.SubsectorRespository;
@@ -22,8 +21,8 @@ public class SubsectorService {
     private SectorService sectorService;
 
     @Transactional
-    public SubsectorModel save(SubsectorPostDto dto){
-        return subsectorRespository.save(new SubsectorModel(dto.name(), sectorService.getById(dto.sector_id())));
+    public SubsectorModel save(SubsectorRecordDto dto){
+        return subsectorRespository.save(new SubsectorModel(dto.name(), sectorService.getById(dto.sectorId())));
     }
 
     public Page<SubsectorModel> getAll(Pageable pageable){
@@ -39,12 +38,12 @@ public class SubsectorService {
     }
 
     @Transactional
-    public SubsectorModel update(UUID id, SubsectorPutDto dto){
+    public SubsectorModel update(UUID id, SubsectorRecordDto dto){
         Optional<SubsectorModel> subsectorModel = subsectorRespository.findById(id);
         if (subsectorModel.isPresent()){
             SubsectorModel model = subsectorModel.get();
             if (dto.name() != null) model.setName(dto.name());
-            if (dto.sector_id() != null) model.setSector(sectorService.getById(dto.sector_id()));
+            if (dto.sectorId() != null) model.setSector(sectorService.getById(dto.sectorId()));
             return subsectorRespository.save(model);
         }
         throw new ResourceNotFoundException("Subsector", "id", id.toString());

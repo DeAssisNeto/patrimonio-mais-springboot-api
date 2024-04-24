@@ -1,7 +1,6 @@
 package com.francisco.patrimoniomais.services;
 
-import com.francisco.patrimoniomais.dtos.CompanyPostDto;
-import com.francisco.patrimoniomais.dtos.CompanyPutDto;
+import com.francisco.patrimoniomais.dtos.CompanyRecordDto;
 import com.francisco.patrimoniomais.exceptions.ResourceNotFoundException;
 import com.francisco.patrimoniomais.models.CompanyModel;
 import com.francisco.patrimoniomais.repositories.CompanyRepository;
@@ -20,7 +19,7 @@ public class CompanyService {
     private CompanyRepository companyRepository;
 
     @Transactional
-    public CompanyModel save(CompanyPostDto dto){
+    public CompanyModel save(CompanyRecordDto dto){
         return companyRepository.save(new CompanyModel(dto.name(), dto.cnpj(), dto.description()));
     }
 
@@ -35,7 +34,7 @@ public class CompanyService {
     }
 
     @Transactional
-    public CompanyModel update(UUID id, CompanyPutDto dto){
+    public CompanyModel update(UUID id, CompanyRecordDto dto){
         Optional<CompanyModel> model = companyRepository.findById(id);
         if (model.isPresent()){
             dto.toModel(model.get());

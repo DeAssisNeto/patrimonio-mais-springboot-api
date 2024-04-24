@@ -1,7 +1,6 @@
 package com.francisco.patrimoniomais.controllers;
 
-import com.francisco.patrimoniomais.dtos.CompanyPostDto;
-import com.francisco.patrimoniomais.dtos.CompanyPutDto;
+import com.francisco.patrimoniomais.dtos.CompanyRecordDto;
 import com.francisco.patrimoniomais.models.CompanyModel;
 import com.francisco.patrimoniomais.services.CompanyService;
 import com.francisco.patrimoniomais.utils.ApiGlobalResponseDto;
@@ -24,7 +23,7 @@ public class CompanyController {
     private CompanyService companyService;
 
     @PostMapping
-    public ResponseEntity<ApiGlobalResponseDto> save(@RequestBody @Valid CompanyPostDto dto) {
+    public ResponseEntity<ApiGlobalResponseDto> save(@RequestBody @Valid CompanyRecordDto dto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(new ApiGlobalResponseDto(companyService.save(dto)));
 
     }
@@ -36,7 +35,7 @@ public class CompanyController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ApiGlobalResponseDto> update(@RequestBody CompanyPutDto dto, @PathVariable(value = "id")UUID id){
+    public ResponseEntity<ApiGlobalResponseDto> update(@RequestBody CompanyRecordDto dto, @PathVariable(value = "id")UUID id){
         return ResponseEntity.status(HttpStatus.OK).body(new ApiGlobalResponseDto(companyService.update(id, dto)));
     }
 

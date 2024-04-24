@@ -11,8 +11,8 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-@Entity
 @Table(name = "tb_patrimony")
+@Entity
 @Getter
 @Setter
 @NoArgsConstructor
@@ -27,23 +27,23 @@ public class PatrimonyModel implements Serializable {
     @Column(unique = true, length = 20)
     private String serialNumber;
     @Column(nullable = false)
-    private LocalDateTime acquisition_date;
+    private LocalDateTime acquisitionDate;
     @Column(nullable = false)
-    private BigDecimal acquisition_value;
+    private BigDecimal acquisitionValue;
     @Column(nullable = false)
-    private GroupEnum group;
-    @ManyToOne
-    @JoinColumn(name = "location_id")
-    private LocationModel location;
+    private GroupEnum groupType;
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private UserModel user_at;
+    private UserModel userAt;
     @ManyToOne
     @JoinColumn(name = "tombamento_id")
     private TombamentoModel tombamento;
     @ManyToOne
     @JoinColumn(name = "company_id")
     private CompanyModel company;
+    @Column(nullable = false, columnDefinition = "BOOLEAN DEFAULT TRUE")
+    private Boolean active;
+
 
 
 }

@@ -1,7 +1,6 @@
 package com.francisco.patrimoniomais.controllers;
 
-import com.francisco.patrimoniomais.dtos.LocationPostDto;
-import com.francisco.patrimoniomais.dtos.LocationPutDto;
+import com.francisco.patrimoniomais.dtos.LocationRecordDto;
 import com.francisco.patrimoniomais.models.LocationModel;
 import com.francisco.patrimoniomais.services.LocationService;
 import com.francisco.patrimoniomais.utils.ApiGlobalResponseDto;
@@ -22,7 +21,7 @@ public class LocationController {
     private LocationService locationService;
 
     @PostMapping
-    public ResponseEntity<ApiGlobalResponseDto> save(@RequestBody @Valid LocationPostDto dto){
+    public ResponseEntity<ApiGlobalResponseDto> save(@RequestBody @Valid LocationRecordDto dto){
         return ResponseEntity.status(HttpStatus.CREATED).body(new ApiGlobalResponseDto(locationService.save(dto)));
     }
 
@@ -32,7 +31,7 @@ public class LocationController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ApiGlobalResponseDto> update(@RequestBody LocationPutDto dto, @PathVariable(value = "id")UUID id){
+    public ResponseEntity<ApiGlobalResponseDto> update(@RequestBody LocationRecordDto dto, @PathVariable(value = "id")UUID id){
         return ResponseEntity.status(HttpStatus.OK).body(new ApiGlobalResponseDto(locationService.update(id, dto)));
     }
 

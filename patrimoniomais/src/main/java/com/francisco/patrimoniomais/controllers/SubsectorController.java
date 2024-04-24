@@ -1,7 +1,6 @@
 package com.francisco.patrimoniomais.controllers;
 
-import com.francisco.patrimoniomais.dtos.SubsectorPostDto;
-import com.francisco.patrimoniomais.dtos.SubsectorPutDto;
+import com.francisco.patrimoniomais.dtos.SubsectorRecordDto;
 import com.francisco.patrimoniomais.models.SubsectorModel;
 import com.francisco.patrimoniomais.services.SubsectorService;
 import com.francisco.patrimoniomais.utils.ApiGlobalResponseDto;
@@ -23,7 +22,7 @@ public class SubsectorController {
     private SubsectorService subsectorService;
 
     @PostMapping
-    public ResponseEntity<ApiGlobalResponseDto> save(@RequestBody SubsectorPostDto dto){
+    public ResponseEntity<ApiGlobalResponseDto> save(@RequestBody SubsectorRecordDto dto){
         return ResponseEntity.status(HttpStatus.CREATED).body(new ApiGlobalResponseDto(subsectorService.save(dto)));
     }
 
@@ -34,7 +33,7 @@ public class SubsectorController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ApiGlobalResponseDto> update(@RequestBody SubsectorPutDto dto, @PathVariable(value = "id")UUID id){
+    public ResponseEntity<ApiGlobalResponseDto> update(@RequestBody SubsectorRecordDto dto, @PathVariable(value = "id")UUID id){
         return ResponseEntity.status(HttpStatus.OK).body(new ApiGlobalResponseDto(subsectorService.update(id, dto)));
     }
 

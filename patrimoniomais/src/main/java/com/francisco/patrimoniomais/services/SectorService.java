@@ -1,7 +1,6 @@
 package com.francisco.patrimoniomais.services;
 
-import com.francisco.patrimoniomais.dtos.SectorPostDto;
-import com.francisco.patrimoniomais.dtos.SectorPutDto;
+import com.francisco.patrimoniomais.dtos.SectorRecordDto;
 import com.francisco.patrimoniomais.exceptions.ResourceNotFoundException;
 import com.francisco.patrimoniomais.models.SectorModel;
 import com.francisco.patrimoniomais.repositories.SectorRepository;
@@ -22,8 +21,8 @@ public class SectorService {
     private CompanyService companyService;
 
     @Transactional
-    public SectorModel save(SectorPostDto dto){
-        return sectorRepository.save(new SectorModel(dto.name(), companyService.getById(dto.company_id())));
+    public SectorModel save(SectorRecordDto dto){
+        return sectorRepository.save(new SectorModel(dto.name(), companyService.getById(dto.companyId())));
     }
 
     public Page<SectorModel> getAll(Pageable pageable){
@@ -37,12 +36,12 @@ public class SectorService {
     }
 
     @Transactional
-    public SectorModel update(UUID id, SectorPutDto dto){
+    public SectorModel update(UUID id, SectorRecordDto dto){
         Optional<SectorModel> sectorModel = sectorRepository.findById(id);
         if(sectorModel.isPresent()){
             SectorModel model = sectorModel.get();
             if (dto.name() != null) model.setName(dto.name());
-            if (dto.company_id() != null) model.setCompany(companyService.getById(dto.company_id()));
+            if (dto.companyId() != null) model.setCompany(companyService.getById(dto.companyId()));
             return sectorRepository.save(sectorModel.get());
         }
         throw new ResourceNotFoundException("Sector", "id", id.toString());
