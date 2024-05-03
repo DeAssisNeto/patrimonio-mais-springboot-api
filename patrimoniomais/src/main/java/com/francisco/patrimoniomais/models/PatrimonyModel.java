@@ -44,6 +44,16 @@ public class PatrimonyModel implements Serializable {
     @Column(nullable = false, columnDefinition = "BOOLEAN DEFAULT TRUE")
     private Boolean active;
 
-
-
+    public PatrimonyModel(String name, String description, String serialNumber, LocalDateTime acquisitionDate, BigDecimal acquisitionValue, GroupEnum groupType, UserModel userAt, TombamentoModel tombamento, CompanyModel company) {
+        this.name = name;
+        this.description = description;
+        this.serialNumber = serialNumber;
+        this.acquisitionDate = acquisitionDate;
+        this.acquisitionValue = acquisitionValue;
+        this.groupType = groupType;
+        this.userAt = userAt;
+        this.tombamento = tombamento;
+        this.company = company;
+        this.active = true;
+    }
 }

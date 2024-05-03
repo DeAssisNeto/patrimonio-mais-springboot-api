@@ -9,5 +9,4 @@ import java.util.UUID;
 @Repository
 public interface PatrimonyRepository extends JpaRepository<PatrimonyModel, UUID> {
 
-
 }

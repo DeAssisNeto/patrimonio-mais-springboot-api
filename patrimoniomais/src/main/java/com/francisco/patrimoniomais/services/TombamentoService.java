@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -19,6 +20,7 @@ public class TombamentoService {
     @Autowired
     private TombamentoRepository tombamentoRepository;
 
+    @Transactional
     public TombamentoModel save(TombamentoRecordDto dto){
         return tombamentoRepository.save(new TombamentoModel(dto.statusType(), dto.code(), LocalDateTime.now(ZoneId.of("UTC"))));
     }
@@ -27,6 +29,13 @@ public class TombamentoService {
         return tombamentoRepository.findAll(pageable);
     }
 
+    public TombamentoModel getById(UUID id){
+        Optional<TombamentoModel> model = tombamentoRepository.findById(id);
+        if (model.isPresent()) return model.get();
+        throw new ResourceNotFoundException("Tombamento", "id", id.toString());
+    }
+
+    @Transactional
     public TombamentoModel update(UUID id, TombamentoRecordDto dto){
         Optional<TombamentoModel> tombamentoModel = tombamentoRepository.findById(id);
         if (tombamentoModel.isPresent()){
@@ -38,6 +47,7 @@ public class TombamentoService {
         throw new ResourceNotFoundException("Tombamento", "id", id.toString());
     }
 
+    @Transactional
     public void deleteById(UUID id){
         Optional<TombamentoModel> model = tombamentoRepository.findById(id);
         if (model.isEmpty()){
