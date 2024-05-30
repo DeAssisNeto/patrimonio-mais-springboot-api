@@ -46,8 +46,9 @@ public class CompanyService {
 
     @Transactional
     public void delete(UUID id){
-        if (!companyRepository.existsById(id)) throw new ResourceNotFoundException("Company", "id", id.toString());
-        companyRepository.deleteById(id);
+        Optional<CompanyModel> model = companyRepository.findById(id);
+        if (model.isEmpty()) throw new ResourceNotFoundException("Company", "id", id.toString());
+        model.get().setActive(false);
     }
 
 }
