@@ -73,10 +73,9 @@ public class PatrimonyService {
 
 
     public void deleteById(UUID id){
-        if (!patrimonyRepository.existsById(id)){
-            throw new ResourceNotFoundException("Patrimony", "id", id.toString());
-        }
-        patrimonyRepository.deleteById(id);
+        Optional<PatrimonyModel> model = patrimonyRepository.findById(id);
+        if (model.isEmpty()){throw new ResourceNotFoundException("Patrimony", "id", id.toString());}
+        model.get().setActive(false);
     }
 
 
