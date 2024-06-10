@@ -43,6 +43,7 @@ public class UserModel implements UserDetails {
         this.login = login;
         this.password = password;
         this.role = role;
+        this.active = true;
     }
 
     @Override
