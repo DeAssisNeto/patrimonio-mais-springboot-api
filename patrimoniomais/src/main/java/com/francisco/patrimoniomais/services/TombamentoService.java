@@ -50,9 +50,7 @@ public class TombamentoService {
     @Transactional
     public void deleteById(UUID id){
         Optional<TombamentoModel> model = tombamentoRepository.findById(id);
-        if (model.isEmpty()){
-            throw new ResourceNotFoundException("Tombamento", "id", id.toString());
-        }
-        tombamentoRepository.deleteById(id);
+        if (model.isEmpty()){throw new ResourceNotFoundException("Tombamento", "id", id.toString());}
+        model.get().setActive(false);
     }
 }
