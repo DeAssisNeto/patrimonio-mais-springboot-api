@@ -52,10 +52,8 @@ public class SubsectorService {
     @Transactional
     public void deleteById(UUID id){
         Optional<SubsectorModel> model = subsectorRespository.findById(id);
-        if (model.isEmpty()){
-            throw new ResourceNotFoundException("Subsector", "id", id.toString());
-        }
-        subsectorRespository.deleteById(id);
+        if (model.isEmpty()){throw new ResourceNotFoundException("Subsector", "id", id.toString());}
+        model.get().setActive(false);
     }
 
 }
