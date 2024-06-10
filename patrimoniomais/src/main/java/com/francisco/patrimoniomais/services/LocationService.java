@@ -46,10 +46,8 @@ public class LocationService {
     @Transactional
     public void deleteById(UUID id){
         Optional<LocationModel> model = locationRepository.findById(id);
-        if (model.isEmpty()){
-            throw new ResourceNotFoundException("Location", "id", id.toString());
-        }
-        locationRepository.deleteById(id);
+        if (model.isEmpty()){throw new ResourceNotFoundException("Location", "id", id.toString());}
+        model.get().setActive(false);
     }
 
 
