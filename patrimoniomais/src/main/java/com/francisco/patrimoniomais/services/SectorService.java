@@ -50,10 +50,8 @@ public class SectorService {
     @Transactional
     public void deleteById(UUID id){
         Optional<SectorModel> model = sectorRepository.findById(id);
-        if (model.isEmpty()){
-            throw new ResourceNotFoundException("Sector", "id", id.toString());
-        }
-        sectorRepository.deleteById(id);
+        if (model.isEmpty()){throw new ResourceNotFoundException("Sector", "id", id.toString());}
+        model.get().setActive(false);
     }
 
 }
