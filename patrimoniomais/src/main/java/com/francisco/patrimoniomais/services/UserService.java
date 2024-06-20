@@ -33,7 +33,7 @@ public class UserService {
     }
 
     public Page<UserModel> getAll(Pageable pageable){
-        return userRepository.findAll(pageable);
+        return userRepository.findAllByActiveTrue(pageable);
     }
 
     public UserModel getById(UUID id){
