@@ -24,7 +24,7 @@ public class CompanyService {
     }
 
     public Page<CompanyModel> getAll(Pageable pageable){
-        return companyRepository.findAll(pageable);
+        return companyRepository.findAllByActiveTrue(pageable);
     }
 
     public CompanyModel getById(UUID id){
