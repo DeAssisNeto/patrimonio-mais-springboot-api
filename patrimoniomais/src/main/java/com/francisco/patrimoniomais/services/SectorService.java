@@ -26,7 +26,7 @@ public class SectorService {
     }
 
     public Page<SectorModel> getAll(Pageable pageable){
-        return sectorRepository.findAll(pageable);
+        return sectorRepository.findAllByActiveTrue(pageable);
     }
 
     public SectorModel getById(UUID id){
