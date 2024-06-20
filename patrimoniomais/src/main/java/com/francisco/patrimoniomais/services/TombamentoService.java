@@ -26,7 +26,7 @@ public class TombamentoService {
     }
 
     public Page<TombamentoModel> getAll(Pageable pageable){
-        return tombamentoRepository.findAll(pageable);
+        return tombamentoRepository.findAllByActiveTrue(pageable);
     }
 
     public TombamentoModel getById(UUID id){
