@@ -38,7 +38,7 @@ public class PatrimonyService {
     }
 
     public Page<PatrimonyModel> getAll(Pageable pageable){
-        return patrimonyRepository.findAll(pageable);
+        return patrimonyRepository.findAllByActiveTrue(pageable);
     }
 
 
@@ -76,6 +76,8 @@ public class PatrimonyService {
         Optional<PatrimonyModel> model = patrimonyRepository.findById(id);
         if (model.isEmpty()){throw new ResourceNotFoundException("Patrimony", "id", id.toString());}
         model.get().setActive(false);
+        patrimonyRepository.save(model.get());
+        System.out.println(model.get().getActive());
     }
 
 

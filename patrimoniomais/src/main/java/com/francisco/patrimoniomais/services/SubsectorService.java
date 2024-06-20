@@ -26,7 +26,7 @@ public class SubsectorService {
     }
 
     public Page<SubsectorModel> getAll(Pageable pageable){
-        return subsectorRespository.findAll(pageable);
+        return subsectorRespository.findAllByActiveTrue(pageable);
     }
 
     public SubsectorModel getById(UUID id) {

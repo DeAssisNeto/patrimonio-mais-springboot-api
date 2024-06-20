@@ -27,7 +27,7 @@ public class LocationService {
     }
 
     public Page<LocationModel> getAll(Pageable pageable){
-        return locationRepository.findAll(pageable);
+        return locationRepository.findAllByActiveTrue(pageable);
     }
 
     @Transactional
