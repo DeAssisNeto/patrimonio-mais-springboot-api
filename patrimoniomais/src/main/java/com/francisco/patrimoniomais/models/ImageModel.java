@@ -22,4 +22,9 @@ public class ImageModel implements Serializable {
     @ManyToOne
     @JoinColumn(name = "patrimony_id")
     private PatrimonyModel patrimony;
+
+    public ImageModel(String path, PatrimonyModel patrimony) {
+        this.path = path;
+        this.patrimony = patrimony;
+    }
 }
