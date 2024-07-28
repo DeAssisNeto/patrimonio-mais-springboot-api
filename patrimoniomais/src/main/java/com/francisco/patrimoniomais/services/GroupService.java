@@ -3,10 +3,7 @@ package com.francisco.patrimoniomais.services;
 import com.francisco.patrimoniomais.dtos.GroupRecordDto;
 import com.francisco.patrimoniomais.dtos.LocationPatrimonyRecordDto;
 import com.francisco.patrimoniomais.exceptions.ResourceNotFoundException;
-import com.francisco.patrimoniomais.models.GroupModel;
-import com.francisco.patrimoniomais.models.LocationModel;
-import com.francisco.patrimoniomais.models.LocationPatrimonyModel;
-import com.francisco.patrimoniomais.models.PatrimonyModel;
+import com.francisco.patrimoniomais.models.*;
 import com.francisco.patrimoniomais.repositories.GroupRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -29,6 +26,12 @@ public class GroupService {
 
     public Page<GroupModel> findAll(Pageable pageable) {
         return groupRepository.findAll(pageable);
+    }
+
+    public GroupModel getById(UUID id){
+        Optional<GroupModel> model =  groupRepository.findById(id);
+        if (model.isPresent()) {return model.get();}
+        throw new ResourceNotFoundException("Group", "id", id.toString());
     }
 
     @Transactional
