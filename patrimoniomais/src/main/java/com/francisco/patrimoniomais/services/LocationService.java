@@ -3,6 +3,7 @@ package com.francisco.patrimoniomais.services;
 import com.francisco.patrimoniomais.dtos.LocationRecordDto;
 import com.francisco.patrimoniomais.exceptions.ResourceNotFoundException;
 import com.francisco.patrimoniomais.models.LocationModel;
+import com.francisco.patrimoniomais.models.PatrimonyModel;
 import com.francisco.patrimoniomais.repositories.LocationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -28,6 +29,15 @@ public class LocationService {
 
     public Page<LocationModel> getAll(Pageable pageable){
         return locationRepository.findAllByActiveTrue(pageable);
+    }
+
+    public LocationModel getById(UUID id){
+        Optional<LocationModel> model = locationRepository.findById(id);
+        if (model.isPresent()){
+            return model.get();
+        }
+        throw new ResourceNotFoundException("Location", "id", id.toString());
+
     }
 
     @Transactional
