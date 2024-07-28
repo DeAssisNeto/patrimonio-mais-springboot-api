@@ -1,7 +1,9 @@
 package com.francisco.patrimoniomais.enums;
 
 public enum GroupEnum {
-    ELETRONICO("eletronico");
+    ELETRONICOS("eletronicos"),
+    MOVEIS("moveis")
+    ;
 
     private String groupType;
 

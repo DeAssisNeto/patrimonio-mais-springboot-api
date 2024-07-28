@@ -8,7 +8,7 @@ import lombok.Setter;
 import java.io.Serializable;
 import java.util.UUID;
 
-@Table(name = "tb_user_company")
+@Table(name = "tb_location_patrimony")
 @Entity
 @Getter
 @Setter
