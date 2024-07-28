@@ -1,5 +1,6 @@
 package com.francisco.patrimoniomais.controllers;
 
+import com.francisco.patrimoniomais.dtos.CompanyRecordDto;
 import com.francisco.patrimoniomais.dtos.ImageRecordDto;
 import com.francisco.patrimoniomais.models.ImageModel;
 import com.francisco.patrimoniomais.services.ImageService;
@@ -12,6 +13,8 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/image")
@@ -30,5 +33,15 @@ public class ImageController {
             page = 0, size = 10, sort = "id", direction = Sort.Direction.ASC
     ) Pageable pageable) {
         return ResponseEntity.ok(imageService.findAll(pageable));
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity<ApiGlobalResponseDto> update(@RequestBody ImageRecordDto dto, @PathVariable(value = "id") UUID id){
+        return ResponseEntity.status(HttpStatus.OK).body(new ApiGlobalResponseDto(imageService.update(id, dto)));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteById(@PathVariable(value = "id") UUID id){
+        imageService.delete(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }
