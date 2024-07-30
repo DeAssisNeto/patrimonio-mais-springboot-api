@@ -2,10 +2,7 @@ package com.francisco.patrimoniomais.services;
 
 import com.francisco.patrimoniomais.dtos.PatrimonyRecordDto;
 import com.francisco.patrimoniomais.exceptions.ResourceNotFoundException;
-import com.francisco.patrimoniomais.models.CompanyModel;
-import com.francisco.patrimoniomais.models.PatrimonyModel;
-import com.francisco.patrimoniomais.models.TombamentoModel;
-import com.francisco.patrimoniomais.models.UserModel;
+import com.francisco.patrimoniomais.models.*;
 import com.francisco.patrimoniomais.repositories.PatrimonyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -25,15 +22,20 @@ public class PatrimonyService {
     private TombamentoService tombamentoService;
     @Autowired
     private CompanyService companyService;
+    @Autowired
+    private SubgroupService subgroupService;
 
 
     public PatrimonyModel save(PatrimonyRecordDto dto){
         UserModel user = userService.getById(dto.userId());
         TombamentoModel tombamento = tombamentoService.getById(dto.tombamentoId());
         CompanyModel company = companyService.getById(dto.companyId());
+        SubgroupModel subgroup = subgroupService.getById(dto.subgroupId());
+
+        if (patrimonyRepository.existsBySerialNumber(dto.serialNumber())) throw new RuntimeException("Já existe");
 
         return patrimonyRepository.save(new PatrimonyModel(dto.name(), dto.description(), dto.serialNumber(),
-                dto.acquisitionDate(), dto.acquisitionValue(), dto.groupType(), user, tombamento,
+                dto.acquisitionDate(), dto.acquisitionValue(), subgroup, user, tombamento,
                 company));
     }
 
@@ -60,7 +62,7 @@ public class PatrimonyService {
             if (dto.serialNumber()!= null) model.setSerialNumber(dto.serialNumber());
             if (dto.acquisitionDate()!= null) model.setAcquisitionDate(dto.acquisitionDate());
             if (dto.acquisitionValue()!= null) model.setAcquisitionValue(dto.acquisitionValue());
-            if (dto.groupType()!= null) model.setGroupType(dto.groupType());
+            if (dto.subgroupId()!= null) model.setSubgroup(subgroupService.getById(dto.subgroupId()));
             if (dto.userId()!= null) model.setUserAt(userService.getById(dto.userId()));
             if (dto.tombamentoId()!= null) model.setTombamento(tombamentoService.getById(dto.tombamentoId()));
             if (dto.companyId()!= null) model.setCompany(companyService.getById(dto.companyId()));

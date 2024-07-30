@@ -30,8 +30,9 @@ public class PatrimonyModel implements Serializable {
     private LocalDateTime acquisitionDate;
     @Column(nullable = false)
     private BigDecimal acquisitionValue;
-    @Column(nullable = false)
-    private GroupEnum groupType;
+    @ManyToOne
+    @JoinColumn(name = "subgroup_id")
+    private SubgroupModel subgroup;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private UserModel userAt;
@@ -44,13 +45,16 @@ public class PatrimonyModel implements Serializable {
     @Column(nullable = false, columnDefinition = "BOOLEAN DEFAULT TRUE")
     private Boolean active;
 
-    public PatrimonyModel(String name, String description, String serialNumber, LocalDateTime acquisitionDate, BigDecimal acquisitionValue, GroupEnum groupType, UserModel userAt, TombamentoModel tombamento, CompanyModel company) {
+    public PatrimonyModel(String name, String description, String serialNumber,
+                          LocalDateTime acquisitionDate, BigDecimal acquisitionValue,
+                          SubgroupModel subgroupModel, UserModel userAt, TombamentoModel tombamento,
+                          CompanyModel company) {
         this.name = name;
         this.description = description;
         this.serialNumber = serialNumber;
         this.acquisitionDate = acquisitionDate;
         this.acquisitionValue = acquisitionValue;
-        this.groupType = groupType;
+        this.subgroup = subgroupModel;
         this.userAt = userAt;
         this.tombamento = tombamento;
         this.company = company;

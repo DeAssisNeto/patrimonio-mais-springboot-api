@@ -24,7 +24,7 @@ public record PatrimonyRecordDto(@NotNull(message = "O campo não pode ser nulo"
                                  BigDecimal acquisitionValue,
                                  @NotNull(message = "O campo não pode ser nulo")
                                  @NotBlank(message = "O campo não pode estar em branco")
-                                 GroupEnum groupType,
+                                 UUID subgroupId,
                                  @NotNull(message = "O campo não pode ser nulo")
                                  @NotBlank(message = "O campo não pode estar em branco")
                                  UUID userId,
