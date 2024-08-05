@@ -13,4 +13,5 @@ import java.util.UUID;
 public interface PatrimonyRepository extends JpaRepository<PatrimonyModel, UUID> {
     Page<PatrimonyModel> findAllByActiveTrue(Pageable pageable);
     boolean existsBySerialNumber(String serialNumber);
+    Page<PatrimonyModel> findAllBySubgroupIs(String subgroup, Pageable pageable);
 }

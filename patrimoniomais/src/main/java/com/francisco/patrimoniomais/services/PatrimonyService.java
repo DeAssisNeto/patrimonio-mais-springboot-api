@@ -1,14 +1,18 @@
 package com.francisco.patrimoniomais.services;
 
 import com.francisco.patrimoniomais.dtos.PatrimonyRecordDto;
+import com.francisco.patrimoniomais.enums.SubgroupEnum;
 import com.francisco.patrimoniomais.exceptions.ResourceNotFoundException;
 import com.francisco.patrimoniomais.models.*;
 import com.francisco.patrimoniomais.repositories.PatrimonyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -82,6 +86,17 @@ public class PatrimonyService {
         System.out.println(model.get().getActive());
     }
 
+    public Page<PatrimonyModel> findAllBySubgroup(SubgroupEnum subgroup, Pageable pageable){
+        Page<PatrimonyModel>  patrimonies = this.getAll(pageable);
+        List<PatrimonyModel> patrimonyList = patrimonies
+                .stream().filter(p -> p
+                .getSubgroup()
+                .getName()
+                .equals(subgroup))
+                .toList();
+
+        return new PageImpl<>(patrimonyList, pageable, patrimonyList.size());
+    }
 
 
 }

@@ -1,6 +1,8 @@
 package com.francisco.patrimoniomais.controllers;
 
 import com.francisco.patrimoniomais.dtos.PatrimonyRecordDto;
+import com.francisco.patrimoniomais.enums.GroupEnum;
+import com.francisco.patrimoniomais.enums.SubgroupEnum;
 import com.francisco.patrimoniomais.models.PatrimonyModel;
 import com.francisco.patrimoniomais.services.PatrimonyService;
 import com.francisco.patrimoniomais.utils.ApiGlobalResponseDto;
@@ -43,4 +45,16 @@ public class PatrimonyController {
         patrimonyService.deleteById(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
+
+    @GetMapping("/{group}")
+    public ResponseEntity<Page<PatrimonyModel>> getAllBySubgroup(@PathVariable(value = "group") SubgroupEnum subgroupEnum,
+                                                              @PageableDefault(
+                                                                      page = 0,
+                                                                      size =10,
+                                                                      sort = "id",
+                                                                      direction = Sort.Direction.ASC ) Pageable pageable
+                                                              ){
+        return ResponseEntity.ok(patrimonyService.findAllBySubgroup(subgroupEnum, pageable));
+    }
+
 }
