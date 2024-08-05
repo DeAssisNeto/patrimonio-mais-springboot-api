@@ -1,6 +1,7 @@
 package com.francisco.patrimoniomais.services;
 
 import com.francisco.patrimoniomais.dtos.PatrimonyRecordDto;
+import com.francisco.patrimoniomais.enums.GroupEnum;
 import com.francisco.patrimoniomais.enums.SubgroupEnum;
 import com.francisco.patrimoniomais.exceptions.ResourceNotFoundException;
 import com.francisco.patrimoniomais.models.*;
@@ -93,6 +94,19 @@ public class PatrimonyService {
                 .getSubgroup()
                 .getName()
                 .equals(subgroup))
+                .toList();
+
+        return new PageImpl<>(patrimonyList, pageable, patrimonyList.size());
+    }
+
+    public Page<PatrimonyModel> findAllByGroup(GroupEnum group, Pageable pageable){
+        Page<PatrimonyModel>  patrimonies = this.getAll(pageable);
+        List<PatrimonyModel> patrimonyList = patrimonies
+                .stream().filter(p -> p
+                        .getSubgroup()
+                        .getGroup()
+                        .getName()
+                        .equals(group))
                 .toList();
 
         return new PageImpl<>(patrimonyList, pageable, patrimonyList.size());

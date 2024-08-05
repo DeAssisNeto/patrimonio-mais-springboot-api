@@ -46,15 +46,27 @@ public class PatrimonyController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
-    @GetMapping("/{group}")
-    public ResponseEntity<Page<PatrimonyModel>> getAllBySubgroup(@PathVariable(value = "group") SubgroupEnum subgroupEnum,
+    @GetMapping("/by-subgroup")
+    public ResponseEntity<Page<PatrimonyModel>> getAllBySubgroup(@RequestParam SubgroupEnum subgroup,
                                                               @PageableDefault(
                                                                       page = 0,
                                                                       size =10,
                                                                       sort = "id",
                                                                       direction = Sort.Direction.ASC ) Pageable pageable
                                                               ){
-        return ResponseEntity.ok(patrimonyService.findAllBySubgroup(subgroupEnum, pageable));
+        return ResponseEntity.ok(patrimonyService.findAllBySubgroup(subgroup, pageable));
     }
+
+    @GetMapping("/by-group")
+    public ResponseEntity<Page<PatrimonyModel>> getAllByGroup(@RequestParam GroupEnum group,
+                                                              @PageableDefault(
+                                                                      page = 0,
+                                                                      size =10,
+                                                                      sort = "id",
+                                                                      direction = Sort.Direction.ASC ) Pageable pageable
+                                                              ){
+        return ResponseEntity.ok(patrimonyService.findAllByGroup(group, pageable));
+    }
+
 
 }
