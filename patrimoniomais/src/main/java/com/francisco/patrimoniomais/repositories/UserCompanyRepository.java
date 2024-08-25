@@ -1,6 +1,5 @@
 package com.francisco.patrimoniomais.repositories;
 
-import com.francisco.patrimoniomais.models.TombamentoModel;
 import com.francisco.patrimoniomais.models.UserCompanyModel;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

@@ -1,7 +1,6 @@
 package com.francisco.patrimoniomais.services;
 
 import com.francisco.patrimoniomais.dtos.GroupRecordDto;
-import com.francisco.patrimoniomais.dtos.LocationPatrimonyRecordDto;
 import com.francisco.patrimoniomais.exceptions.ResourceNotFoundException;
 import com.francisco.patrimoniomais.models.*;
 import com.francisco.patrimoniomais.repositories.GroupRepository;

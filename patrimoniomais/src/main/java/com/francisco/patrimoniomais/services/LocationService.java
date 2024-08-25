@@ -3,7 +3,6 @@ package com.francisco.patrimoniomais.services;
 import com.francisco.patrimoniomais.dtos.LocationRecordDto;
 import com.francisco.patrimoniomais.exceptions.ResourceNotFoundException;
 import com.francisco.patrimoniomais.models.LocationModel;
-import com.francisco.patrimoniomais.models.PatrimonyModel;
 import com.francisco.patrimoniomais.repositories.LocationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

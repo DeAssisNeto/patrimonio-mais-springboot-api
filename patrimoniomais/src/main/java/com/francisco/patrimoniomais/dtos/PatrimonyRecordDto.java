@@ -1,6 +1,5 @@
 package com.francisco.patrimoniomais.dtos;
 
-import com.francisco.patrimoniomais.enums.GroupEnum;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 

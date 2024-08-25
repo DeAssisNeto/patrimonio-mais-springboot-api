@@ -1,6 +1,5 @@
 package com.francisco.patrimoniomais.controllers;
 
-import com.francisco.patrimoniomais.dtos.CompanyRecordDto;
 import com.francisco.patrimoniomais.dtos.ImageRecordDto;
 import com.francisco.patrimoniomais.models.ImageModel;
 import com.francisco.patrimoniomais.services.ImageService;

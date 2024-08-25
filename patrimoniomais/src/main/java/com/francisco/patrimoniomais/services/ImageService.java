@@ -1,9 +1,7 @@
 package com.francisco.patrimoniomais.services;
 
-import com.francisco.patrimoniomais.dtos.CompanyRecordDto;
 import com.francisco.patrimoniomais.dtos.ImageRecordDto;
 import com.francisco.patrimoniomais.exceptions.ResourceNotFoundException;
-import com.francisco.patrimoniomais.models.CompanyModel;
 import com.francisco.patrimoniomais.models.ImageModel;
 import com.francisco.patrimoniomais.models.PatrimonyModel;
 import com.francisco.patrimoniomais.repositories.ImageRepository;

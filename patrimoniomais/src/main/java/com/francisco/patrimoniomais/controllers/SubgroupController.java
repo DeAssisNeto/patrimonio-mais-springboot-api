@@ -1,10 +1,7 @@
 package com.francisco.patrimoniomais.controllers;
 
-import com.francisco.patrimoniomais.dtos.GroupRecordDto;
 import com.francisco.patrimoniomais.dtos.SubgroupRecordDto;
-import com.francisco.patrimoniomais.models.GroupModel;
 import com.francisco.patrimoniomais.models.SubgroupModel;
-import com.francisco.patrimoniomais.services.GroupService;
 import com.francisco.patrimoniomais.services.SubgroupService;
 import com.francisco.patrimoniomais.utils.ApiGlobalResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;

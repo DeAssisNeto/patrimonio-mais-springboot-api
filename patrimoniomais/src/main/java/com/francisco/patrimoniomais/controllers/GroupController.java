@@ -1,9 +1,7 @@
 package com.francisco.patrimoniomais.controllers;
 
 import com.francisco.patrimoniomais.dtos.GroupRecordDto;
-import com.francisco.patrimoniomais.dtos.LocationPatrimonyRecordDto;
 import com.francisco.patrimoniomais.models.GroupModel;
-import com.francisco.patrimoniomais.models.LocationPatrimonyModel;
 import com.francisco.patrimoniomais.services.GroupService;
 import com.francisco.patrimoniomais.utils.ApiGlobalResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
