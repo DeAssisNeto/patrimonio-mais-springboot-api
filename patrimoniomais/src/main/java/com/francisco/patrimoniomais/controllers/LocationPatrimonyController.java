@@ -34,6 +34,12 @@ public class LocationPatrimonyController {
     ) Pageable pageable) {
         return ResponseEntity.ok(locationPatrimonyService.findAll(pageable));
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ApiGlobalResponseDto> getById(@PathVariable(value = "id") UUID id){
+        return ResponseEntity.ok(new ApiGlobalResponseDto(locationPatrimonyService.getById(id)));
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<ApiGlobalResponseDto> update(@RequestBody LocationPatrimonyRecordDto dto, @PathVariable(value = "id") UUID id){
         return ResponseEntity.status(HttpStatus.OK).body(new ApiGlobalResponseDto(locationPatrimonyService.update(id, dto)));

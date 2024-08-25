@@ -34,6 +34,11 @@ public class CompanyController {
         return ResponseEntity.status(HttpStatus.OK).body(companyService.getAll(pageable));
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<ApiGlobalResponseDto> getById(@PathVariable(value = "id") UUID id){
+        return ResponseEntity.ok(new ApiGlobalResponseDto(companyService.getById(id)));
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<ApiGlobalResponseDto> update(@RequestBody CompanyRecordDto dto, @PathVariable(value = "id")UUID id){
         return ResponseEntity.status(HttpStatus.OK).body(new ApiGlobalResponseDto(companyService.update(id, dto)));

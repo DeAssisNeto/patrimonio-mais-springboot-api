@@ -29,7 +29,7 @@ public class GroupService {
     }
 
     public GroupModel getById(UUID id){
-        Optional<GroupModel> model =  groupRepository.findById(id);
+        Optional<GroupModel> model =  groupRepository.findByIdAndActiveTrue(id);
         if (model.isPresent()) {return model.get();}
         throw new ResourceNotFoundException("Group", "id", id.toString());
     }

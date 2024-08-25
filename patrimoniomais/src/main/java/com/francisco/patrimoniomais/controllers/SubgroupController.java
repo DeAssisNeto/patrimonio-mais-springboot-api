@@ -37,6 +37,12 @@ public class SubgroupController {
     ) Pageable pageable) {
         return ResponseEntity.ok(subgroupService.findAll(pageable));
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ApiGlobalResponseDto> getById(@PathVariable(value = "id") UUID id){
+        return ResponseEntity.ok(new ApiGlobalResponseDto(subgroupService.getById(id)));
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<ApiGlobalResponseDto> update(@RequestBody SubgroupRecordDto dto, @PathVariable(value = "id") UUID id){
         return ResponseEntity.status(HttpStatus.OK).body(new ApiGlobalResponseDto(subgroupService.update(id, dto)));

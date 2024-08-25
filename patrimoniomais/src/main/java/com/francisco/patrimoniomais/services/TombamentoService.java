@@ -30,7 +30,7 @@ public class TombamentoService {
     }
 
     public TombamentoModel getById(UUID id){
-        Optional<TombamentoModel> model = tombamentoRepository.findById(id);
+        Optional<TombamentoModel> model = tombamentoRepository.findByIdAndActiveTrue(id);
         if (model.isPresent()) return model.get();
         throw new ResourceNotFoundException("Tombamento", "id", id.toString());
     }

@@ -33,6 +33,12 @@ public class UserCompanyController {
     ) Pageable pageable) {
         return ResponseEntity.ok(userCompanySevice.findAll(pageable));
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ApiGlobalResponseDto> getById(@PathVariable(value = "id") UUID id){
+        return ResponseEntity.ok(new ApiGlobalResponseDto(userCompanySevice.getById(id)));
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<ApiGlobalResponseDto> update(@RequestBody UserCompanyRecordDto dto, @PathVariable(value = "id") UUID id){
         return ResponseEntity.status(HttpStatus.OK).body(new ApiGlobalResponseDto(userCompanySevice.update(id, dto)));

@@ -30,7 +30,7 @@ public class SubsectorService {
     }
 
     public SubsectorModel getById(UUID id) {
-        Optional<SubsectorModel> model = subsectorRespository.findById(id);
+        Optional<SubsectorModel> model = subsectorRespository.findByIdAndActiveTrue(id);
         if (model.isPresent()) {
             return model.get();
         }

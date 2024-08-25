@@ -20,7 +20,7 @@ public class GroupModel {
     private UUID id;
     @Column(nullable = false)
     private GroupEnum name;
-    @Column(nullable = false)
+    @Column()
     private Boolean active;
 
     public GroupModel(GroupEnum name) {

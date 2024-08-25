@@ -32,6 +32,11 @@ public class SubsectorController {
         return ResponseEntity.status(HttpStatus.OK).body(subsectorService.getAll(pageable));
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<ApiGlobalResponseDto> getById(@PathVariable(value = "id") UUID id){
+        return ResponseEntity.ok(new ApiGlobalResponseDto(subsectorService.getById(id)));
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<ApiGlobalResponseDto> update(@RequestBody SubsectorRecordDto dto, @PathVariable(value = "id")UUID id){
         return ResponseEntity.status(HttpStatus.OK).body(new ApiGlobalResponseDto(subsectorService.update(id, dto)));

@@ -35,6 +35,12 @@ public class GroupController {
     ) Pageable pageable) {
         return ResponseEntity.ok(groupService.findAll(pageable));
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ApiGlobalResponseDto> getById(@PathVariable(value = "id") UUID id){
+        return ResponseEntity.ok(new ApiGlobalResponseDto(groupService.getById(id)));
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<ApiGlobalResponseDto> update(@RequestBody GroupRecordDto dto, @PathVariable(value = "id") UUID id){
         return ResponseEntity.status(HttpStatus.OK).body(new ApiGlobalResponseDto(groupService.update(id, dto)));

@@ -40,6 +40,11 @@ public class LocationPatrimonyService {
     public Page<LocationPatrimonyModel> findAll(Pageable pageable) {
         return locationPatrimonyRepository.findAllByActiveTrue(pageable);
     }
+    public LocationPatrimonyModel getById(UUID id){
+        Optional<LocationPatrimonyModel> model =  locationPatrimonyRepository.findByIdAndActiveTrue(id);
+        if (model.isPresent()) {return model.get();}
+        throw new ResourceNotFoundException("LocationPatrimony", "id", id.toString());
+    }
 
     @Transactional
     public LocationPatrimonyModel update(UUID id, LocationPatrimonyRecordDto dto){

@@ -6,9 +6,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
 public interface LocationRepository extends JpaRepository<LocationModel, UUID> {
     Page<LocationModel> findAllByActiveTrue(Pageable pageable);
+    Optional<LocationModel> findByIdAndActiveTrue(UUID id);
+
 }

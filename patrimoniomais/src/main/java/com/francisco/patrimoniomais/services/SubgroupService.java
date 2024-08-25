@@ -30,7 +30,7 @@ public class SubgroupService {
     }
 
     public SubgroupModel getById(UUID id){
-        Optional<SubgroupModel> model =  subgroupRepository.findById(id);
+        Optional<SubgroupModel> model =  subgroupRepository.findByIdAndActiveTrue(id);
         if (model.isPresent()) {return model.get();}
         throw new ResourceNotFoundException("Subgroup", "id", id.toString());
     }

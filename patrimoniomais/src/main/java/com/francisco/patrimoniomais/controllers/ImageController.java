@@ -34,6 +34,12 @@ public class ImageController {
     ) Pageable pageable) {
         return ResponseEntity.ok(imageService.findAll(pageable));
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ApiGlobalResponseDto> getById(@PathVariable(value = "id") UUID id){
+        return ResponseEntity.ok(new ApiGlobalResponseDto(imageService.getById(id)));
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<ApiGlobalResponseDto> update(@RequestBody ImageRecordDto dto, @PathVariable(value = "id") UUID id){
         return ResponseEntity.status(HttpStatus.OK).body(new ApiGlobalResponseDto(imageService.update(id, dto)));

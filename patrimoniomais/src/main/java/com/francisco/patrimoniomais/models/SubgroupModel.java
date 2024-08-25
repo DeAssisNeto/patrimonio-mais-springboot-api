@@ -22,7 +22,7 @@ public class SubgroupModel {
     @ManyToOne
     @JoinColumn(name = "group_id")
     private GroupModel group;
-    @Column(nullable = false)
+    @Column()
     private Boolean active;
 
     public SubgroupModel(SubgroupEnum name, GroupModel group) {

@@ -35,6 +35,11 @@ public class PatrimonyController {
         return ResponseEntity.status(HttpStatus.OK).body(patrimonyService.getAll(pageable));
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<ApiGlobalResponseDto> getById(@PathVariable(value = "id") UUID id){
+        return ResponseEntity.ok(new ApiGlobalResponseDto(patrimonyService.getById(id)));
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<ApiGlobalResponseDto> update(@PathVariable(value = "id") UUID id, @RequestBody PatrimonyRecordDto dto){
         return ResponseEntity.status(HttpStatus.OK).body(new ApiGlobalResponseDto(patrimonyService.update(id, dto)));

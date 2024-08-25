@@ -50,7 +50,7 @@ public class PatrimonyService {
 
 
     public PatrimonyModel getById(UUID id){
-        Optional<PatrimonyModel> model = patrimonyRepository.findById(id);
+        Optional<PatrimonyModel> model = patrimonyRepository.findByIdAndActiveTrue(id);
         if (model.isPresent()){
             return model.get();
         }

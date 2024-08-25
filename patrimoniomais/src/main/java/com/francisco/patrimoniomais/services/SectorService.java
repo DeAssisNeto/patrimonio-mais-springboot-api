@@ -30,7 +30,7 @@ public class SectorService {
     }
 
     public SectorModel getById(UUID id){
-        Optional<SectorModel> model = sectorRepository.findById(id);
+        Optional<SectorModel> model = sectorRepository.findByIdAndActiveTrue(id);
         if (model.isPresent()) return model.get();
         throw new ResourceNotFoundException("Sector", "id", id.toString());
     }

@@ -33,6 +33,12 @@ public class ImageService {
         return imageRepository.findAll(pageable);
     }
 
+    public ImageModel getById(UUID id){
+        Optional<ImageModel> model =  imageRepository.findById(id);
+        if (model.isPresent()) {return model.get();}
+        throw new ResourceNotFoundException("Image", "id", id.toString());
+    }
+
     @Transactional
     public ImageModel update(UUID id, ImageRecordDto dto){
         Optional<ImageModel> imageOptional = imageRepository.findById(id);

@@ -32,6 +32,12 @@ public class UserCompanyService {
         return userCompanyRepository.findAllByActiveTrue(pageable);
     }
 
+    public UserCompanyModel getById(UUID id){
+        Optional<UserCompanyModel> model =  userCompanyRepository.findByIdAndActiveTrue(id);
+        if (model.isPresent()) {return model.get();}
+        throw new ResourceNotFoundException("UserCompany", "id", id.toString());
+    }
+
     @Transactional
     public UserCompanyModel update(UUID id, UserCompanyRecordDto dto){
         Optional<UserCompanyModel> userCompanyOptional = userCompanyRepository.findById(id);

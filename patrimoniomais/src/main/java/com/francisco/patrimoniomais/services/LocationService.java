@@ -32,7 +32,7 @@ public class LocationService {
     }
 
     public LocationModel getById(UUID id){
-        Optional<LocationModel> model = locationRepository.findById(id);
+        Optional<LocationModel> model = locationRepository.findByIdAndActiveTrue(id);
         if (model.isPresent()){
             return model.get();
         }

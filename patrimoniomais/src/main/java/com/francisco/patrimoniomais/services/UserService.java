@@ -37,7 +37,7 @@ public class UserService {
     }
 
     public UserModel getById(UUID id){
-        Optional<UserModel> model = userRepository.findById(id);
+        Optional<UserModel> model = userRepository.findByIdAndActiveTrue(id);
         if (model.isPresent()) return model.get();
         throw new ResourceNotFoundException("User", "id", id.toString());
     }
