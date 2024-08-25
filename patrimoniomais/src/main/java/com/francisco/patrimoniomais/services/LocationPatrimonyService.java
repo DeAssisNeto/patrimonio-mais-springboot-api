@@ -10,6 +10,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -24,10 +28,13 @@ public class LocationPatrimonyService {
     @Autowired
     private PatrimonyService patrimonyService;
 
+    @Transactional
     public LocationPatrimonyModel save(LocationPatrimonyRecordDto dto) {
         LocationModel locationModel = locationService.getById(dto.locationId());
         PatrimonyModel patrimonyModel = patrimonyService.getById(dto.patrimonyId());
-        return locationPatrimonyRepository.save(new LocationPatrimonyModel(locationModel, patrimonyModel));
+        return locationPatrimonyRepository.save(
+                new LocationPatrimonyModel(
+                        locationModel, patrimonyModel, LocalDateTime.now(ZoneId.of("America/Sao_Paulo"))));
     }
 
     public Page<LocationPatrimonyModel> findAll(Pageable pageable) {
@@ -53,4 +60,16 @@ public class LocationPatrimonyService {
         if (model.isEmpty()) throw new ResourceNotFoundException("LocationPatrimony", "id", id.toString());
         locationPatrimonyRepository.deleteById(id);
     }
+
+    public List<LocationPatrimonyModel> getLastThree(UUID patrimonyId){
+        List<LocationPatrimonyModel> locationPatrimonies = locationPatrimonyRepository.findAllByPatrimonyId(patrimonyId);
+        Comparator<LocationPatrimonyModel> comparator = Comparator.comparing(LocationPatrimonyModel::getCreateAt);
+        return locationPatrimonies.stream()
+                .sorted(comparator.reversed())
+                .limit(3)
+                .toList();
+
+
+    }
+
 }

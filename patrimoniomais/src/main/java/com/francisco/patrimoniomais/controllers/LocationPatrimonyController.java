@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -42,5 +43,11 @@ public class LocationPatrimonyController {
     public ResponseEntity deleteById(@PathVariable(value = "id") UUID id){
         locationPatrimonyService.delete(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
+    @GetMapping("/tracking/{id}")
+    public ResponseEntity<List<LocationPatrimonyModel>> tracking(@PathVariable(value = "id") UUID locationPatrimonyId
+    ){
+        return ResponseEntity.ok(locationPatrimonyService.getLastThree(locationPatrimonyId));
     }
 }
