@@ -26,7 +26,7 @@ public class SubgroupService {
     }
 
     public Page<SubgroupModel> findAll(Pageable pageable) {
-        return subgroupRepository.findAll(pageable);
+        return subgroupRepository.findAllByActiveTrue(pageable);
     }
 
     public SubgroupModel getById(UUID id){

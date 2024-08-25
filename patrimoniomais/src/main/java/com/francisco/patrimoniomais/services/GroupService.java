@@ -25,7 +25,7 @@ public class GroupService {
     }
 
     public Page<GroupModel> findAll(Pageable pageable) {
-        return groupRepository.findAll(pageable);
+        return groupRepository.findAllByActiveTrue(pageable);
     }
 
     public GroupModel getById(UUID id){

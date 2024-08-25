@@ -38,7 +38,7 @@ public class LocationPatrimonyService {
     }
 
     public Page<LocationPatrimonyModel> findAll(Pageable pageable) {
-        return locationPatrimonyRepository.findAll(pageable);
+        return locationPatrimonyRepository.findAllByActiveTrue(pageable);
     }
 
     @Transactional

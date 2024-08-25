@@ -20,8 +20,11 @@ public class GroupModel {
     private UUID id;
     @Column(nullable = false)
     private GroupEnum name;
+    @Column(nullable = false)
+    private Boolean active;
 
     public GroupModel(GroupEnum name) {
         this.name = name;
+        this.active = true;
     }
 }

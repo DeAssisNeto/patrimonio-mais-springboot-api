@@ -29,7 +29,7 @@ public class UserCompanyService {
     }
 
     public Page<UserCompanyModel> findAll(Pageable pageable) {
-        return userCompanyRepository.findAll(pageable);
+        return userCompanyRepository.findAllByActiveTrue(pageable);
     }
 
     @Transactional

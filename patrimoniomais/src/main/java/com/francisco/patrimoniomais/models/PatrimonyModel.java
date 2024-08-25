@@ -1,6 +1,5 @@
 package com.francisco.patrimoniomais.models;
 
-import com.francisco.patrimoniomais.enums.GroupEnum;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
